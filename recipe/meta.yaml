@@ -1,4 +1,4 @@
-{% set version = "1.0.0" %}
+{% set version = "1.0.2" %}
 {% set python_min = "3.11" %}
 
 package:
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/m/mne-rt/mne_rt-{{ version }}.tar.gz
-  sha256: a656cc6288695225a1d0fdea551a6275a40230e909702f828178e0e0bf6251d1
+  sha256: 5e2dac3f7daa0aa1ed62dfc1baedd4e84951ad65c50d9704e395a7463e4fa7a5
 
 build:
   entry_points:
