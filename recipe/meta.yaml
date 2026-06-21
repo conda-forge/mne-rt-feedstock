@@ -1,4 +1,4 @@
-{% set version = "1.0.0" %}
+{% set version = "1.0.2" %}
 {% set python_min = "3.11" %}
 
 package:
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/m/mne-rt/mne_rt-{{ version }}.tar.gz
-  sha256: a656cc6288695225a1d0fdea551a6275a40230e909702f828178e0e0bf6251d1
+  sha256: 5e2dac3f7daa0aa1ed62dfc1baedd4e84951ad65c50d9704e395a7463e4fa7a5
 
 build:
   entry_points:
@@ -32,7 +32,6 @@ requirements:
     - scipy >=1.13
     - matplotlib-base >=3.9
     - nibabel >=5.0
-    - pyqt6 >=6.7
     - pyqtgraph >=0.13
     - qtpy >=2.4
     - pyserial >=3.0
@@ -42,19 +41,20 @@ requirements:
     - pyyaml >=6.0
     - imageio >=2.28
     - imageio-ffmpeg
-    # python-osc is not yet on conda-forge; install via pip if OSC feedback output is needed
+    # python-osc is not on conda-forge; install via pip if OSC feedback output is needed
+    # a Qt binding (pyqt/pyside6) is required at runtime but not pinned here — install one alongside
 
 test:
   imports:
     - mne_rt
   commands:
-    # Needs mne-lsl fix (https://github.com/conda-forge/mne-lsl-feedstock/pull/34 and/or https://github.com/mne-tools/mne-lsl/pull/549)
-    # - pip check
-    # mne-rt --help crashes on Windows (CP1252 encoding) until 1.0.1 is released
+    - pip check
+    - mne-rt --help
     - python -c "import mne_rt; assert mne_rt.__version__ == '{{ version }}', mne_rt.__version__"
   requires:
     - python {{ python_min }}
     - pip
+    - pyqt >=5.15
 
 about:
   home: https://github.com/payamsash/mne-rt
