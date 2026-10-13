@@ -48,26 +48,45 @@ requirements:
     # a Qt binding (pyqt6/pyside6) is required at runtime but not pinned here — install one alongside
 
 tests:
-  - python:
-      imports:
-        - mne_rt
-      pip_check: true
-      python_version:
-        - ${{ python_min }}.*
-        - "*"
+  # Importing mne_rt needs a Qt binding (via pyqtgraph), which `python:` tests can't add,
+  # so test each supported binding on the minimum and latest Python with script tests
   - requirements:
       run:
         - python ${{ python_min }}.*
+        - pip
         - pyqt6 >=6.7
     script:
+      - python -m pip check
+      - mne-rt --help
+      - python -c "import mne_rt; assert mne_rt.__version__ == '${{ version }}', mne_rt.__version__"
+      - python -c "import qtpy; assert qtpy.API_NAME == 'PyQt6', qtpy.API_NAME"
+  - requirements:
+      run:
+        - python
+        - pip
+        - pyqt6 >=6.7
+    script:
+      - python -m pip check
       - mne-rt --help
       - python -c "import mne_rt; assert mne_rt.__version__ == '${{ version }}', mne_rt.__version__"
       - python -c "import qtpy; assert qtpy.API_NAME == 'PyQt6', qtpy.API_NAME"
   - requirements:
       run:
         - python ${{ python_min }}.*
+        - pip
         - pyside6 >=6.7
     script:
+      - python -m pip check
+      - mne-rt --help
+      - python -c "import mne_rt; assert mne_rt.__version__ == '${{ version }}', mne_rt.__version__"
+      - python -c "import qtpy; assert qtpy.API_NAME == 'PySide6', qtpy.API_NAME"
+  - requirements:
+      run:
+        - python
+        - pip
+        - pyside6 >=6.7
+    script:
+      - python -m pip check
       - mne-rt --help
       - python -c "import mne_rt; assert mne_rt.__version__ == '${{ version }}', mne_rt.__version__"
       - python -c "import qtpy; assert qtpy.API_NAME == 'PySide6', qtpy.API_NAME"
