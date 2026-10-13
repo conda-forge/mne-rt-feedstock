@@ -1,0 +1,113 @@
+schema_version: 1
+
+context:
+  version: "1.2.0"
+
+package:
+  name: mne-rt
+  version: ${{ version }}
+
+source:
+  url: https://files.pythonhosted.org/packages/source/m/mne-rt/mne_rt-${{ version }}.tar.gz
+  sha256: 25394313b519b04c7b8f8c7a20ca5d1a5a561685d9c151b844a8be6912063ba0
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  python:
+    entry_points:
+      - mne-rt = mne_rt.cli:main
+
+requirements:
+  host:
+    - python ${{ python_min }}.*
+    - setuptools >=68
+    - pip
+  run:
+    - python >=${{ python_min }}
+    - mne-base >=1.8
+    - mne-lsl >=1.7
+    - mne-connectivity >=0.7
+    - mne-features >=0.3
+    - mne-icalabel >=0.5
+    - numpy >=2.0,<3
+    - scipy >=1.13
+    - matplotlib-base >=3.9
+    - nibabel >=5.0
+    - pyqtgraph >=0.13
+    - qtpy >=2.4
+    - pyserial >=3.0
+    - fooof >=1.0
+    - pyunlocbox >=0.5.2
+    - pactools >=0.3
+    - pyyaml >=6.0
+    - imageio >=2.28
+    - imageio-ffmpeg
+    # python-osc is not on conda-forge; install via pip if OSC feedback output is needed
+    # a Qt binding (pyqt6/pyside6) is required at runtime but not pinned here — install one alongside
+
+tests:
+  # Importing mne_rt needs a Qt binding (via pyqtgraph), which `python:` tests can't add,
+  # so test each supported binding on the minimum and latest Python with script tests
+  - requirements:
+      run:
+        - python ${{ python_min }}.*
+        - pip
+        # TODO: remove once mne-icalabel 0.10.0 is rebuilt (build 0 has broken 0.0.0 metadata)
+        - mne-icalabel !=0.10.0
+        - pyqt6 >=6.7
+    script:
+      - python -m pip check
+      - mne-rt --help
+      - python -c "import mne_rt; assert mne_rt.__version__ == '${{ version }}', mne_rt.__version__"
+      - python -c "import qtpy; assert qtpy.API_NAME == 'PyQt6', qtpy.API_NAME"
+  - requirements:
+      run:
+        - python
+        - pip
+        # TODO: remove once mne-icalabel 0.10.0 is rebuilt (build 0 has broken 0.0.0 metadata)
+        - mne-icalabel !=0.10.0
+        - pyqt6 >=6.7
+    script:
+      - python -m pip check
+      - mne-rt --help
+      - python -c "import mne_rt; assert mne_rt.__version__ == '${{ version }}', mne_rt.__version__"
+      - python -c "import qtpy; assert qtpy.API_NAME == 'PyQt6', qtpy.API_NAME"
+  - requirements:
+      run:
+        - python ${{ python_min }}.*
+        - pip
+        # TODO: remove once mne-icalabel 0.10.0 is rebuilt (build 0 has broken 0.0.0 metadata)
+        - mne-icalabel !=0.10.0
+        - pyside6 >=6.7
+    script:
+      - python -m pip check
+      - mne-rt --help
+      - python -c "import mne_rt; assert mne_rt.__version__ == '${{ version }}', mne_rt.__version__"
+      - python -c "import qtpy; assert qtpy.API_NAME == 'PySide6', qtpy.API_NAME"
+  - requirements:
+      run:
+        - python
+        - pip
+        # TODO: remove once mne-icalabel 0.10.0 is rebuilt (build 0 has broken 0.0.0 metadata)
+        - mne-icalabel !=0.10.0
+        - pyside6 >=6.7
+    script:
+      - python -m pip check
+      - mne-rt --help
+      - python -c "import mne_rt; assert mne_rt.__version__ == '${{ version }}', mne_rt.__version__"
+      - python -c "import qtpy; assert qtpy.API_NAME == 'PySide6', qtpy.API_NAME"
+
+about:
+  homepage: https://github.com/payamsash/mne-rt
+  summary: MNE-RT - real-time M/EEG signal processing and analysis
+  documentation: https://payamsash.github.io/mne-rt/
+  repository: https://github.com/payamsash/mne-rt
+  license: MIT
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - payamsash
+    - larsoner
