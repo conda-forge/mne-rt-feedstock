@@ -54,6 +54,8 @@ tests:
       run:
         - python ${{ python_min }}.*
         - pip
+        # TODO: remove once mne-icalabel 0.10.0 is rebuilt (build 0 has broken 0.0.0 metadata)
+        - mne-icalabel !=0.10.0
         - pyqt6 >=6.7
     script:
       - python -m pip check
@@ -64,6 +66,8 @@ tests:
       run:
         - python
         - pip
+        # TODO: remove once mne-icalabel 0.10.0 is rebuilt (build 0 has broken 0.0.0 metadata)
+        - mne-icalabel !=0.10.0
         - pyqt6 >=6.7
     script:
       - python -m pip check
@@ -74,6 +78,8 @@ tests:
       run:
         - python ${{ python_min }}.*
         - pip
+        # TODO: remove once mne-icalabel 0.10.0 is rebuilt (build 0 has broken 0.0.0 metadata)
+        - mne-icalabel !=0.10.0
         - pyside6 >=6.7
     script:
       - python -m pip check
@@ -84,6 +90,8 @@ tests:
       run:
         - python
         - pip
+        # TODO: remove once mne-icalabel 0.10.0 is rebuilt (build 0 has broken 0.0.0 metadata)
+        - mne-icalabel !=0.10.0
         - pyside6 >=6.7
     script:
       - python -m pip check
