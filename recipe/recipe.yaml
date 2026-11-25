@@ -100,11 +100,11 @@ tests:
       - python -c "import qtpy; assert qtpy.API_NAME == 'PySide6', qtpy.API_NAME"
 
 about:
-  homepage: https://github.com/payamsash/mne-rt
+  homepage: https://github.com/mne-rt-org/mne-rt
   summary: MNE-RT - real-time M/EEG signal processing and analysis
-  documentation: https://payamsash.github.io/mne-rt/
-  repository: https://github.com/payamsash/mne-rt
-  license: MIT
+  documentation: https://mne-rt-org.github.io/mne-rt/
+  repository: https://github.com/mne-rt-org/mne-rt
+  license: BSD-3-Clause
   license_file: LICENSE
 
 extra:
