@@ -3,15 +3,15 @@ About mne-rt-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/mne-rt-feedstock/blob/main/LICENSE.txt)
 
-Home: https://github.com/payamsash/mne-rt
+Home: https://github.com/mne-rt-org/mne-rt
 
-Package license: MIT
+Package license: BSD-3-Clause
 
 Summary: MNE-RT - real-time M/EEG signal processing and analysis
 
-Development: https://github.com/payamsash/mne-rt
+Development: https://github.com/mne-rt-org/mne-rt
 
-Documentation: https://payamsash.github.io/mne-rt/
+Documentation: https://mne-rt-org.github.io/mne-rt/
 
 Current build status
 ====================

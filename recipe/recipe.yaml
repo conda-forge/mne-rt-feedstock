@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: "1.3.0"
+  version: "1.3.1"
 
 package:
   name: mne-rt
@@ -9,7 +9,7 @@ package:
 
 source:
   url: https://files.pythonhosted.org/packages/source/m/mne-rt/mne_rt-${{ version }}.tar.gz
-  sha256: 7003d233aed85021189f61110ebb706cac3bdea5eb3fa5bad5c31a2451f3b52e
+  sha256: cabadb7d656a07b7f1384301f258c5ce59c7b8fdc12fd2765701c540f4078325
 
 build:
   number: 0
